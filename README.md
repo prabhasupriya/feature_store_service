@@ -38,14 +38,32 @@ This project is a production-ready, low-latency **Feature Store serving layer** 
 git clone [https://github.com/prabhasupriya/feature_store_service.git](https://github.com/prabhasupriya/feature_store_service.git)
 cd feature_store_service
 cp .env.example .env
-2. Run with Docker ComposeBashdocker-compose up --build -d
+
+```
+2. Run with Docker 
+```bash
+ComposeBashdocker-compose up --build -d
+```
 This orchestrates the Redis instance, the FastAPI server, and the Ingestor service automatically.
 ##  Verification & Testing
-1. Check Ingestion PipelineBashdocker logs -f feature_store_ingestor
-Expect: Ingested/Updated 500 features. Total unique users: 1000002. Run Test SuiteBashdocker exec -it feature_store_api sh -c "PYTHONPATH=. pytest tests/"
+1. Check Ingestion Pipeline
+```Bash
+docker logs -f feature_store_ingestor
+```
+Expect: Ingested/Updated 500 features. Total unique users: 1000002. 
+Run Test Suite
+```Bash
+docker exec -it feature_store_api sh -c "PYTHONPATH=. pytest tests/"
+```
 ### API Documentation
-🟢 Get User FeaturesEndpoint: GET /features/{user_id}Sample Request:Bashcurl http://localhost:8000/features/user00001
-🔵 Batch Feature RetrievalEndpoint: POST /features/batchSample Request (Windows Command Prompt):DOScurl -X POST http://localhost:8000/features/batch -H "Content-Type: application/json" -d "{\"user_ids\":[\"user00001\",\"user00002\"]}"
+🟢 Get User FeaturesEndpoint: GET /features/{user_id}Sample Request:
+```Bash
+curl http://localhost:8000/features/user00001
+```
+🔵 Batch Feature RetrievalEndpoint: POST /features/batchSample Request (Windows Command Prompt):DOS
+```bash 
+curl -X POST http://localhost:8000/features/batch -H "Content-Type: application/json" -d "{\"user_ids\":[\"user00001\",\"user00002\"]}"
+```
 ### Performance Benchmarks
 Tested under 10 concurrent requests against 100k records.Endpointp90 LatencyRequirementStatusGET /features/{user_id}14.2ms< 50ms✅ PASSEDPOST /features/batch31.5msN/A✅ OPTIMIZED
 ## Project Structure
