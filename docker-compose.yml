@@ -6,7 +6,7 @@ services:
     container_name: feature_store_redis
     ports:
       - "6379:6379"
-    command: redis-server --appendonly yes
+    command: redis-server --appendonly yes # Mandatory for data persistence
     volumes:
       - redis_data:/data
     healthcheck:
@@ -38,7 +38,7 @@ services:
       redis:
         condition: service_healthy
     command: python scripts/ingest_features.py
-    restart: on-failure
+    restart: always
 
 volumes:
   redis_data:
