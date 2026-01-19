@@ -1,20 +1,20 @@
-# 🚀 High-Performance ML Feature Store Backend
+#  High-Performance ML Feature Store Backend
 
 
 
-## 📝 Description
+##  Description
 This project is a production-ready, low-latency **Feature Store serving layer** built with **FastAPI** and **Redis**. It bridges the gap between raw data engineering and real-time model inference, providing ML models with millisecond-access to curated features.
 
 
 
-## ⚡ Key Capabilities
+##  Key Capabilities
 * **High Throughput:** Handles thousands of requests per second using an asynchronous Python stack.
 * **Real-time Ingestion:** Background pipeline simulating 100,000+ active feature updates.
 * **Ultra-low Latency:** Designed for sub-50ms p90 latency, essential for recommender systems and fraud detection.
 
 
 
-## 🏛 Architectural Decisions & Rationale
+##  Architectural Decisions & Rationale
 
 ### 1. Data Storage Strategy
 * **Redis Hashes:** We utilize Redis Hashes (`user:{user_id}:features`) to store feature sets. This allows $O(1)$ access to individual fields and avoids the heavy overhead of JSON serialization.
@@ -31,7 +31,7 @@ This project is a production-ready, low-latency **Feature Store serving layer** 
 
 
 
-## 🛠 Setup & Installation
+##  Setup & Installation
 
 ### 1. Clone & Configure
 ```bash
@@ -56,16 +56,16 @@ Run Test Suite
 docker exec -it feature_store_api sh -c "PYTHONPATH=. pytest tests/"
 ```
 ### API Documentation
-🟢 Get User FeaturesEndpoint: GET /features/{user_id}Sample Request:
+ Get User FeaturesEndpoint: GET /features/{user_id}Sample Request:
 ```Bash
 curl http://localhost:8000/features/user00001
 ```
-🔵 Batch Feature RetrievalEndpoint: POST /features/batchSample Request (Windows Command Prompt):DOS
+ Batch Feature RetrievalEndpoint: POST /features/batchSample Request (Windows Command Prompt):DOS
 ```bash 
 curl -X POST http://localhost:8000/features/batch -H "Content-Type: application/json" -d "{\"user_ids\":[\"user00001\",\"user00002\"]}"
 ```
 ### Performance Benchmarks
-Tested under 10 concurrent requests against 100k records.Endpointp90 LatencyRequirementStatusGET /features/{user_id}14.2ms< 50ms✅ PASSEDPOST /features/batch31.5msN/A✅ OPTIMIZED
+Tested under 10 concurrent requests against 100k records.Endpointp90 LatencyRequirementStatusGET /features/{user_id}14.2ms< 50ms PASSEDPOST /features/batch31.5msN/A OPTIMIZED
 ## Project Structure
  Plaintext├── app/
 │   ├── api/            # Route definitions & controllers
